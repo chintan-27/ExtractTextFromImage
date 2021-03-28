@@ -26,6 +26,7 @@ def upload_page():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
+            print(request.files)
             return render_template('upload.html', msg='No file selected')
         file = request.files['file']
         print(file)
@@ -42,7 +43,15 @@ def upload_page():
 
             # call the OCR function on it
             extracted_text = ocr_core(file)
-            response = jsonify(text = extracted_text)
+            text = extracted_text.split('\n')
+            for i in text:
+                if(len(i.strip()) == 14):
+                    for j in i:
+                        if(j.isdigit() or j == " "):
+                            aadharno = i.strip()
+                        else:
+                            break
+            response = jsonify(text = extracted_text + aadharno)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
