@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from ocr_core import ocr_core
 
-
 UPLOAD_FOLDER = '/static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -31,7 +30,7 @@ def upload_page():
         file = request.files['file']
         print(file)
         print(file.filename)
-        
+
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
@@ -45,13 +44,13 @@ def upload_page():
             extracted_text = ocr_core(file)
             text = extracted_text.split('\n')
             for i in text:
-                if(len(i.strip()) == 14):
+                if (len(i.strip()) == 14):
                     for j in i:
-                        if(j.isdigit() or j == " "):
+                        if (j.isdigit() or j == " "):
                             aadharno = i.strip()
                         else:
                             break
-            response = jsonify(text = extracted_text + aadharno)
+            response = jsonify(text=extracted_text + aadharno)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
@@ -60,10 +59,11 @@ def upload_page():
             #                        extracted_text=extracted_text,
             #                        img_src=UPLOAD_FOLDER + file.filename)
             return response
-        
+
     # elif request.method == 'GET':
     #     return render_template('upload.html')
 
+
 if __name__ == '__main__':
-    app.debug=True
-    app.run('127.0.0.1',port=4444)
+    app.debug = True
+    app.run()

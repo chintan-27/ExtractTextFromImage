@@ -3,12 +3,11 @@ try:
 except ImportError:
     import Image
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+
+pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+
 
 def ocr_core(filename):
-    """
-    This function will handle the core OCR processing of images.
-    """
-    text = pytesseract.image_to_string(Image.open(filename))  # We'll use Pillow's Image class to open the image and pytesseract to detect the string in the image
-    return text  # Then we will print the text in the image
 
+    text = pytesseract.image_to_string(Image.open(filename))
+    return text
