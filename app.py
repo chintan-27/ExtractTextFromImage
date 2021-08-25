@@ -25,24 +25,20 @@ def upload_page():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            print(request.files)
-            return render_template('upload.html', msg='No file selected')
+            return jsonify(message="No file selected")
         file = request.files['file']
-        print(file)
-        print(file.filename)
 
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            print(file)
-            return render_template('upload.html', msg='No file selected')
+            return jsonify(message="No file selected")
 
         if file and allowed_file(file.filename):
             file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, file.filename))
 
             # call the OCR function on it
             extracted_text = ocr_core(file)
-            response = jsonify(text=extracted_text)
+            response = jsonify(message="Successful", text=extracted_text)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
@@ -52,8 +48,8 @@ def upload_page():
             #                        img_src=UPLOAD_FOLDER + file.filename)
             return response
 
-    # elif request.method == 'GET':
-    #     return render_template('upload.html')
+    elif request.method == 'GET':
+        return jsonify(message="Cannot GET")
 
 
 if __name__ == '__main__':
