@@ -33,9 +33,6 @@ def upload_page():
         if file.filename == '':
             return jsonify(message="No file selected")
 
-        if (file and allowed_file(file.filename)):
-            return jsonify(message="Only jpg, jpeg, png and gif files allowed")
-
         if file and allowed_file(file.filename):
             file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, file.filename))
 
@@ -50,6 +47,8 @@ def upload_page():
             #                        extracted_text=extracted_text,
             #                        img_src=UPLOAD_FOLDER + file.filename)
             return response
+        else:
+            return jsonify(message="Only jpg, jpeg, png and gif files allowed")
 
     elif request.method == 'GET':
         return jsonify(message="Cannot GET")
