@@ -42,15 +42,7 @@ def upload_page():
 
             # call the OCR function on it
             extracted_text = ocr_core(file)
-            text = extracted_text.split('\n')
-            for i in text:
-                if (len(i.strip()) == 14):
-                    for j in i:
-                        if (j.isdigit() or j == " "):
-                            aadharno = i.strip()
-                        else:
-                            break
-            response = jsonify(text=extracted_text + aadharno)
+            response = jsonify(text=extracted_text)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
