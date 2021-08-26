@@ -23,11 +23,11 @@ def home_page():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_page():
     if request.method == 'POST':
-        print(request.data)
-        print(request.json)
-        print(request.get_data())
-        print(request.get_data())
-        print(request.files)
+        # print(request.data)
+        # print(request.json)
+        # print(request.get_data())
+        # print(request.get_data())
+        # print(request.files)
         # check if the post request has the file part
         if 'file' not in request.files:
             return jsonify(message="No file selected")
@@ -36,14 +36,16 @@ def upload_page():
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            return jsonify(message="No file selected")
+            return jsonify(sucessful=False, message="No file selected")
 
         if file and allowed_file(file.filename):
             file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, file.filename))
 
             # call the OCR function on it
             extracted_text = ocr_core(file)
-            response = jsonify(message="Successful", text=extracted_text)
+            response = jsonify(sucessful=True,
+                               message="Successful",
+                               text=extracted_text)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
@@ -53,10 +55,11 @@ def upload_page():
             #                        img_src=UPLOAD_FOLDER + file.filename)
             return response
         else:
-            return jsonify(message="Only jpg, jpeg, png and gif files allowed")
+            return jsonify(sucessful=False,
+                           message="Only jpg, jpeg, png and gif files allowed")
 
     elif request.method == 'GET':
-        return jsonify(message="Cannot GET")
+        return jsonify(sucessful=False, message="Cannot GET")
 
 
 if __name__ == '__main__':
