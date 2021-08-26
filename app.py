@@ -23,7 +23,10 @@ def home_page():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_page():
     if request.method == 'POST':
-        print(request.post)
+        print(request.data)
+        print(request.json)
+        print(request.get_data())
+        print(request.get_data())
         print(request.files)
         # check if the post request has the file part
         if 'file' not in request.files:
