@@ -11,6 +11,6 @@ pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 def ocr_core(filename):
 
     text = pytesseract.image_to_string(Image.open(filename))
-    print(os.path.getsize(filename))
-    print(filename)
+    print(os.path.getsize(filename.filename))
+    print(filename.filename)
     return text
