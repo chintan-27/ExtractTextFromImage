@@ -38,9 +38,12 @@ def upload_page():
 
             # call the OCR function on it
             extracted_text = ocr_core(file)
-            response = jsonify(sucessful=True,
-                               message="Successful",
-                               text=extracted_text)
+            response = jsonify(
+                sucessful=True,
+                message="Successful",
+                text=extracted_text,
+                link="https://extract-text-image.herokuapp.com/static/uploads/"
+                + file.filename)
             response.headers.add("Access-Control-Allow-Origin", "*")
 
             # extract the text and display it
