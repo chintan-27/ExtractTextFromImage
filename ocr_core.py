@@ -38,7 +38,7 @@ def ocr_core(filename):
         analysis = response_final.json()
         p = analysis
 
-        print(json.dumps(analysis, indent=4))
+        # print(json.dumps(analysis, indent=4))
 
         time.sleep(1)
         if ("analyzeResult" in analysis):
