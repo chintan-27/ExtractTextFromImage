@@ -41,7 +41,7 @@ def upload_page():
             response = jsonify(
                 sucessful=True,
                 message="Successful",
-                text=extracted_text,
+                response=extracted_text,
                 link="https://extract-text-image.herokuapp.com/static/uploads/"
                 + file.filename)
             response.headers.add("Access-Control-Allow-Origin", "*")
