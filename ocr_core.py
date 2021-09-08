@@ -27,7 +27,6 @@ def ocr_core(filename):
     data = {'url': image_url}
     response = requests.post(api_url, headers=headers, json=data)
     response.raise_for_status()
-    analysis = response.json()
     operation_url = response.headers["Operation-Location"]
 
     # The recognized text isn't immediately available, so poll to wait for completion.
