@@ -52,4 +52,7 @@ def ocr_core(filename):
         l.append(x["text"])
 
     # print(l)
-    return {"text": '\n'.join(l), "data": analysis}
+    text = '\n'.join(l)
+    text = text.replace("-\n", "")
+    text = text.replace("\n", " ")
+    return {"text": text, "data": analysis}
