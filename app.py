@@ -31,7 +31,7 @@ def upload_page():
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            return jsonify(sucessful=False, message="No file selected")
+            return jsonify(sucess=False, message="No file selected")
 
         if file and allowed_file(file.filename):
             file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, file.filename))
@@ -39,7 +39,7 @@ def upload_page():
             # call the OCR function on it
             extracted_text = ocr_core(file)
             response = jsonify(
-                sucessful=True,
+                sucess=True,
                 message="Successful",
                 response=extracted_text,
                 link="https://extract-text-image.herokuapp.com/static/uploads/"
@@ -53,11 +53,11 @@ def upload_page():
             #                        img_src=UPLOAD_FOLDER + file.filename)
             return response
         else:
-            return jsonify(sucessful=False,
+            return jsonify(sucess=False,
                            message="Only jpg, jpeg, png and gif files allowed")
 
     elif request.method == 'GET':
-        return jsonify(sucessful=False, message="Cannot GET")
+        return jsonify(sucess=False, message="Cannot GET")
 
 
 if __name__ == '__main__':
