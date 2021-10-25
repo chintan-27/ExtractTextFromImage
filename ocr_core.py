@@ -2,14 +2,14 @@ try:
     from PIL import Image
 except ImportError:
     import Image
-import pytesseract
+# import pytesseract
 import os
 import sys
 import requests
 import time
 import json
 
-pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+# pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
 
 def ocr_core(filename):
