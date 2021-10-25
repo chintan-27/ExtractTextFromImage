@@ -35,7 +35,7 @@ def upload_page():
             file.save(os.path.join(os.getcwd() + UPLOAD_FOLDER, file.filename))
 
             # call the OCR function on it
-            check_blur = test_blurry(file.filename)
+            check_blur = test_blurry("static/uploads/" + file.filename)
             if (check_blur['fm'] > 100):
                 return jsonify(
                     success=False,
