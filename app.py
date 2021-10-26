@@ -36,7 +36,7 @@ def upload_page():
 
             # call the OCR function on it
             check_blur = test_blurry("static/uploads/" + file.filename)
-            if (check_blur['fm'] > 5000):
+            if (check_blur['fm'] > 4000):
                 return jsonify(
                     success=False,
                     message=
